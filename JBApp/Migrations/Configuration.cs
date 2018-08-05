@@ -22,7 +22,7 @@ namespace JBApp.Migrations
             {
                 context.Products.Add(new Product() { Id = "1", Brand = "Samsung", Description = "Samsung Phone", Model = "Samsung galaxy" });
                 context.Products.Add(new Product() { Id = "2", Brand = "Apple", Description = "Iphone", Model = "Iphone 7" });
-                context.Products.Add(new Product() { Id = "3", Brand = "Sony", Description = "Sony Phone", Model = "TV" });
+                context.Products.Add(new Product() { Id = "3", Brand = "Sony", Description = "Sony Phone", Model = "Sony" });
             }
         }
     }

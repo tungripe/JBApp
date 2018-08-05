@@ -67,9 +67,14 @@ namespace JBApp.Controllers
         }
 
         // DELETE products/{id}
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(string id)
         {
-            return Ok();
+            var result = _prodService.Delete(id);
+
+            if (result)
+                return Ok();
+            else
+                return BadRequest();
         }
     }
 }

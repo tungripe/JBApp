@@ -23,9 +23,9 @@ namespace JBApp.Services
             return _context.Products.FirstOrDefault(x => x.Id == id);
         }
 
-        public IEnumerable<Product> GetAll()
+        public List<Product> GetAll()
         {
-            return _context.Products;
+            return _context.Products.ToList();
         }
 
         public bool Update(Product p)
