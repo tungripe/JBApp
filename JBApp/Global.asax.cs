@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Apache.Ignite.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,9 @@ namespace JBApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //ignite
+            Environment.SetEnvironmentVariable("IGNITE_HOME", HttpContext.Current.Server.MapPath(@"~\bin\"));
         }
     }
 }

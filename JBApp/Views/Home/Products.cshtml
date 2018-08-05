@@ -1,0 +1,94 @@
+﻿@{
+    ViewBag.Title = "Products";
+}
+
+<h2>Products test page</h2>
+
+<h4 class="text-info"> 1. Search products </h4>
+<div id="search-products">
+    <label> Model </label>
+    <input type="text" value="" name="Model" class="form-control" /> <br />
+
+    <label> Brand </label> <br />
+    <input type="text" value="" name="Brand" class="form-control" />  <br />
+
+    <label> Description </label> <br />
+    <input type="text" value="" name="Description" class="form-control" />  <br />
+
+    <button id="search-products-submit" class="btn btn-primary"> Submit</button>
+</div>
+
+<h5 class="text-info"> Result </h5>
+<div id="search-products-result">
+</div>
+
+<br />
+<h4 class="text-info"> 2. Search by id </h4>
+<div id="search-by-id">
+    <label> Product ID </label> <input type="text" name="Id" class="form-control" /> <br />
+    <button id="search-by-id-submit" class="btn btn-primary"> Submit </button>
+</div>
+
+<h5 class="text-info"> Result </h5>
+<div id="search-by-id-result">
+</div>
+
+<br />
+<h4 class="text-info"> 3. Create a product </h4>
+<div id="create-product">
+    <label> Product Id </label>
+    <input type="text" value="" name="Id" class="form-control" /> <br />
+
+    <label> Model </label>
+    <input type="text" value="" name="Model" class="form-control" /> <br />
+
+    <label> Brand </label> <br />
+    <input type="text" value="" name="Brand" class="form-control" />  <br />
+
+    <label> Description </label> <br />
+    <input type="text" value="" name="Description" class="form-control" />  <br />
+
+    <button id="create-product-submit" class="btn btn-primary"> Submit</button>
+</div>
+
+<h5 class="text-info"> Result </h5>
+<div id="create-product-result">
+</div>
+
+<br />
+<h4 class="text-info"> 4. Update a product </h4>
+<div id="update-product">
+    <label> Product Id </label>
+    <input type="text" value="" name="Id" class="form-control" /> <br />
+
+    <label> Model </label>
+    <input type="text" value="" name="Model" class="form-control" /> <br />
+
+    <label> Brand </label> <br />
+    <input type="text" value="" name="Brand" class="form-control" />  <br />
+
+    <label> Description </label> <br />
+    <input type="text" value="" name="Description" class="form-control" />  <br />
+
+    <button id="update-product-submit" class="btn btn-primary"> Submit</button>
+</div>
+
+<h5 class="text-info"> Result </h5>
+<div id="update-product-result">
+</div>
+
+<br />
+<h4 class="text-info"> 5. Delete </h4>
+<div id="delete">
+    <label> Product Id </label> <input type="text" name="Id" class="form-control" /> <br />
+    <button id="delete-submit" class="btn btn-primary"> Submit </button>
+</div>
+
+<h5 class="text-info"> Result </h5>
+<div id="delete-result">
+</div>
+
+
+@section scripts {
+    <script type="text/javascript" src="~/Scripts/Custom/Products.js"></script>
+}

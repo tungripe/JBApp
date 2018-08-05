@@ -19,12 +19,15 @@ namespace JBApp.UnitTest
         {
             _prodService = new ProductService();
             _prodController = new ProductsController(_prodService);
+
+            //ignite
+            //Environment.SetEnvironmentVariable("IGNITE_HOME", string.Format("{0}", Environment.CurrentDirectory));
         }
 
         [TestMethod]
         public void TestGetAll()
         {
-            var prods = _prodController.Get() as List<Product>;
+            var prods = _prodController.Get(null, null, null) as List<Product>;
 
             Assert.IsTrue( prods.Count > 0);
         }
@@ -33,7 +36,6 @@ namespace JBApp.UnitTest
         public void TestGetSingle()
         {
             var prod = _prodController.Get(id: "1") as OkNegotiatedContentResult<Product>;
-
             Assert.AreEqual(prod.Content.Brand, "Samsung");
         }
 

@@ -18,18 +18,36 @@ namespace JBApp.Services
             _context = new JBAppContext();
         }
 
-        public Product Get(string id)
-        {
-            return _context.Products.FirstOrDefault(x => x.Id == id);
-        }
-
         public List<Product> GetAll()
         {
             return _context.Products.ToList();
         }
 
+		public List<Product> Get(string description, string model, string brand)
+		{
+			IEnumerable<Product> products = _context.Products;
+			if (!string.IsNullOrEmpty(description))
+				products = products.Where( x => x.Description.ToLower().Contains(description.ToLower()));
+
+			if (!string.IsNullOrEmpty(model))
+				products = products.Where( x => x.Model.ToLower().Contains(model.ToLower()));
+
+			if (!string.IsNullOrEmpty(brand))
+				products = products.Where( x => x.Brand.ToLower().Contains(brand.ToLower()));
+			
+			return products.ToList();
+		}
+		
+        public Product Get(string id)
+        {
+            return _context.Products.FirstOrDefault(x => x.Id == id);
+        }
+
         public bool Update(Product p)
         {
+            if (!p.IsValid())
+                return false;
+
             var prod = _context.Products.FirstOrDefault(x => x.Id == p.Id);
 
             if (prod != null)
@@ -47,6 +65,9 @@ namespace JBApp.Services
 
         public Product Add(Product p)
         {
+            if (!p.IsValid())
+                return null;
+
             var prod = Get(p.Id);
             if (prod != null)
                 return null;

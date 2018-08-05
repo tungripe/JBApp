@@ -14,5 +14,10 @@ namespace JBApp.Controllers
 
             return View();
         }
+
+        public ActionResult Products()
+        {
+            return View();
+        }
     }
 }

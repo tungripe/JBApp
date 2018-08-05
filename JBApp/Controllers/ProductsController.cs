@@ -4,11 +4,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Apache.Ignite.Core;
+using Apache.Ignite.Core.Cache;
 using JBApp.Models;
 using JBApp.Services;
 
 namespace JBApp.Controllers
 {
+	[CustomAuthenticationFilterAttribute]
+	[Authorize]
     public class ProductsController : ApiController
     {
         private ProductService _prodService;
@@ -25,11 +29,39 @@ namespace JBApp.Controllers
         }
 
         //GET products
-        public IEnumerable<Product> Get()
+        [Route("api/products/filters/{description?}/{model?}/{brand?}")]
+        public IEnumerable<Product> Get(string description = null, string model = null, string brand = null)
         {
-            var products = _prodService.GetAll();
+            var products = _prodService.Get(description, model, brand);
             return products;
         }
+
+ //       attempt to use ignite to cache data
+ //       //GET products/{id}
+ //       public IHttpActionResult Get(string id)
+ //       {
+ //           //use ignite to cache data
+ //           using (var ignite = Ignition.Start())
+ //           {
+ //               ICache<string, Product> cache = ignite.GetOrCreateCache<string, Product>("products");
+ //               var data = cache.FirstOrDefault(x => x.Key == "id");
+
+ //               if (data != null)
+ //                   return Ok(data);
+ //               else
+ //               {
+ //                   var prod = _prodService.Get(id);
+
+ //                   if (prod == null)
+ //                       return NotFound();
+ //                   else
+ //                   {
+ //                       cache.Put(prod.Id, prod);
+ //                       return Ok(prod);
+ //                   }
+ //               }
+ //           }
+ //       }
 
         //GET products/{id}
         public IHttpActionResult Get(string id)
@@ -39,7 +71,9 @@ namespace JBApp.Controllers
             if (prod == null)
                 return NotFound();
             else
+            {
                 return Ok(prod);
+            }
         }
 
         //POST products
