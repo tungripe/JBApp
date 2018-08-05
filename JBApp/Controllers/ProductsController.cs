@@ -11,53 +11,65 @@ namespace JBApp.Controllers
 {
     public class ProductsController : ApiController
     {
-        private JBAppContext _dbContext;
+        private ProductService _prodService;
 
 
         public ProductsController()
         {
-            _dbContext = new JBAppContext();
+            _prodService = new ProductService();
         }
 
-        public ProductsController(JBAppContext context)
+        public ProductsController(ProductService service)
         {
-            _dbContext = context;
+            _prodService = service;
         }
 
         //GET products
-        //GET products/{id}
-        //POST products
-        //PUT products/{id}
-        //DELETE products/{id}
-        // GET api/<controller>
         public IEnumerable<Product> Get()
         {
-            var products = _dbContext.Products.ToList();
+            var products = _prodService.GetAll();
             return products;
         }
 
+        //GET products/{id}
         public IHttpActionResult Get(string id)
         {
-            var prod = ProductService.Products.FirstOrDefault(x => x.Id == id);
+            var prod = _prodService.Get(id);
+
             if (prod == null)
                 return NotFound();
             else
                 return Ok(prod);
         }
 
-        // POST api/<controller>
-        public void Post([FromBody]string value)
+        //POST products
+        public IHttpActionResult Post(Product p)
         {
+            var result = _prodService.Add(p);
+            if (result != null)
+                return Ok(result);
+            else
+                return BadRequest();
         }
 
-        // PUT api/<controller>/5
-        public void Put(int id, [FromBody]string value)
+        //PUT products/{id}
+        public IHttpActionResult Put(string id, Product p)
         {
+            if (id != p.Id)
+                return BadRequest();
+
+            var result = _prodService.Update(p);
+
+            if (result)
+                return Ok();
+            else
+                return BadRequest();
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
+        // DELETE products/{id}
+        public IHttpActionResult Delete(int id)
         {
+            return Ok();
         }
     }
 }

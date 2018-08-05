@@ -10,6 +10,7 @@ namespace JBApp.Migrations
     {
         public Configuration()
         {
+            AutomaticMigrationDataLossAllowed = true;
             AutomaticMigrationsEnabled = true;
             ContextKey = "JBApp.Models.JBAppContext";
         }
